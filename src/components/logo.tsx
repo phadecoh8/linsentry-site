@@ -1,0 +1,3 @@
+import Image from "next/image";
+import Link from "next/link";
+export function Logo({ compact = false }: { compact?: boolean }) { return <Link href="/" className="flex items-center gap-2.5" aria-label="LinSentry home"><span className="flex size-9 items-center justify-center overflow-hidden rounded-lg border border-zinc-200 bg-white p-1 dark:border-zinc-700 dark:bg-zinc-950"><Image src="/logo.png" alt="" width={28} height={28} priority className="size-7 object-contain" /></span>{!compact && <span className="text-base font-semibold tracking-tight text-zinc-950 dark:text-white">LinSentry</span>}</Link>; }
