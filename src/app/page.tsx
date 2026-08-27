@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { InstallPanel } from "@/components/install-panel";
-import { realpathSync } from "fs";
 export const metadata: Metadata = {
     title: "Security Hardening Auditor",
     description: "LinSentry is a lightweight security hardening auditor, available for Linux today with macOS and Windows planned."
@@ -30,7 +29,7 @@ function renderHeroSection() {
             <div className="mt-8 flex justify-center gap-3">
                 <Link
                     href="/docs/install"
-                    className="rounded-lg bg-zinc-950 px-5 py-3 text-sm font-semibold text-white transition hover:bg-zinc-700 dark:bg-white dark:text-zinc-950 dark:hover:bg-zinc-200"
+                    className="rounded-lg bg-zinc-200 px-5 py-3 text-sm font-semibold transition hover:text-[#fff] hover:bg-[#000] dark:bg-white dark:text-zinc-950 dark:hover:bg-zinc-400"
                 >
                     Install LinSentry
                 </Link>
@@ -66,7 +65,7 @@ function renderQuickStart() {
 function renderFeatures() {
     return (
         <section
-            className="border-y border-zinc-200 bg-zinc-50 px-5 py-20 transition-colors dark:border-zinc-800 dark:bg-zinc-900/20"
+            className="border-y border-zinc-200 bg-white px-5 py-20 transition-colors dark:border-zinc-800 dark:bg-zinc-900/20"
         >
             <div
                 className="mx-auto max-w-6xl"
@@ -120,7 +119,7 @@ function renderCTA() {
             </h2>
             <Link
                 href="/docs"
-                className="mt-7 inline-block rounded-lg bg-zinc-950 px-5 py-3 text-sm font-semibold text-white transition hover:bg-zinc-700 dark:bg-white dark:text-zinc-950"
+                className="mt-7 inline-block rounded-lg bg-zinc-200 px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#000] hover:text-[#fff] dark:bg-white dark:text-zinc-950"
             >
                 Read the documentation
             </Link>

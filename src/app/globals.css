@@ -1,9 +1,21 @@
 @import "tailwindcss";
 
-html { scroll-behavior: smooth; }
+/* Tailwind's dark: utilities follow the toggle's .dark class, not the OS theme. */
+@custom-variant dark (&:where(.dark, .dark *));
 
-:root { --background: #ffffff; --foreground: #18181b; }
-.dark { --background: #09090b; --foreground: #fafafa; }
+html {
+  scroll-behavior: smooth;
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #000000;
+}
+
+.dark {
+  --background: #09090b;
+  --foreground: #fafafa;
+}
 
 @theme inline {
   --color-background: var(--background);
@@ -19,5 +31,32 @@ body {
   transition: background-color 180ms ease, color 180ms ease;
 }
 
-::selection { background: #18181b; color: #fff; }
-.dark ::selection { background: #fff; color: #18181b; }
+/* Make every existing zinc text utility black in light mode. */
+html:not(.dark) .text-zinc-500,
+html:not(.dark) .text-zinc-600,
+html:not(.dark) .text-zinc-700,
+html:not(.dark) .text-zinc-950 {
+  color: #000000;
+}
+
+html:not(.dark) .text-white,
+html:not(.dark) .text-zinc-100,
+html:not(.dark) .text-zinc-300 {
+  color: #000000;
+}
+
+html:not(.dark) .bg-zinc-50,
+html:not(.dark) .bg-zinc-100,
+html:not(.dark) .bg-zinc-900 {
+  background-color: #ffffff;
+}
+
+::selection {
+  background: #18181b;
+  color: #fff;
+}
+
+.dark ::selection {
+  background: #fff;
+  color: #18181b;
+}
