@@ -1,6 +1,140 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { InstallPanel } from "@/components/install-panel";
-export const metadata: Metadata = { title: "Security Hardening Auditor", description: "LinSentry is a lightweight security hardening auditor, available for Linux today with macOS and Windows planned." };
-const features = ["Open port scanning", "Port exposure detection", "SSH configuration audit", "SSH file permission audit", "World-writable scanner", "User account audit"];
-export default function Home() { return <div><section className="border-b border-zinc-200 px-5 py-24 text-center transition-colors dark:border-zinc-800 sm:py-32"><p className="text-sm font-medium tracking-[.18em] text-zinc-600 dark:text-zinc-400">SECURITY HARDENING AUDITOR</p><h1 className="mx-auto mt-5 max-w-5xl text-5xl font-bold tracking-[-.06em] text-zinc-950 dark:text-white sm:text-7xl lg:text-8xl">Audit your system.<br />Know what needs attention.</h1><p className="mx-auto mt-7 max-w-xl text-base leading-7 text-zinc-600 dark:text-zinc-400">LinSentry is a lightweight security hardening auditor, currently available for Linux. macOS and Windows support are planned.</p><div className="mt-8 flex justify-center gap-3"><Link href="/docs/install" className="rounded-lg bg-zinc-950 px-5 py-3 text-sm font-semibold text-white transition hover:bg-zinc-700 dark:bg-white dark:text-zinc-950 dark:hover:bg-zinc-200">Install LinSentry</Link><Link href="/docs/usage" className="rounded-lg border border-zinc-300 px-5 py-3 text-sm font-semibold text-zinc-950 transition hover:bg-zinc-100 dark:border-zinc-700 dark:text-white dark:hover:bg-zinc-900">Explore usage</Link></div><pre className="mx-auto mt-10 max-w-xl overflow-x-auto rounded-lg bg-zinc-950 p-4 text-left text-xs text-zinc-100 shadow-lg sm:text-sm"><code>$ chmod +x linsentry.sh && ./linsentry.sh</code></pre></section><section className="mx-auto max-w-6xl px-5 py-20"><p className="text-sm font-medium text-zinc-600 dark:text-zinc-400">QUICK START</p><h2 className="mt-3 text-3xl font-semibold tracking-tight text-zinc-950 dark:text-white">One command. A clearer picture.</h2><InstallPanel /></section><section className="border-y border-zinc-200 bg-zinc-50 px-5 py-20 transition-colors dark:border-zinc-800 dark:bg-zinc-900/20"><div className="mx-auto max-w-6xl"><p className="text-sm font-medium text-zinc-600 dark:text-zinc-400">WHAT IT CHECKS</p><h2 className="mt-3 text-3xl font-semibold tracking-tight text-zinc-950 dark:text-white">Focus on the risks that matter.</h2><div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">{features.map((feature, i) => <article className="rounded-xl border border-zinc-200 bg-white p-6 transition duration-200 hover:-translate-y-1 hover:border-zinc-500 dark:border-zinc-800 dark:bg-zinc-950 dark:hover:border-zinc-500" key={feature}><p className="font-mono text-sm text-zinc-500">0{i + 1}</p><h3 className="mt-5 font-semibold text-zinc-950 dark:text-white">{feature}</h3><p className="mt-2 text-sm leading-6 text-zinc-600 dark:text-zinc-400">Practical insight into a common security hardening concern, with clear results to review.</p></article>)}</div></div></section><section className="mx-auto max-w-6xl px-5 py-20 text-center"><h2 className="text-3xl font-semibold tracking-tight text-zinc-950 dark:text-white">Ready to dive into the details?</h2><Link href="/docs" className="mt-7 inline-block rounded-lg bg-zinc-950 px-5 py-3 text-sm font-semibold text-white transition hover:bg-zinc-700 dark:bg-white dark:text-zinc-950">Read the documentation</Link></section></div>; }
+import { realpathSync } from "fs";
+export const metadata: Metadata = {
+    title: "Security Hardening Auditor",
+    description: "LinSentry is a lightweight security hardening auditor, available for Linux today with macOS and Windows planned."
+};
+const features = [
+    "Open port scanning",
+    "Port exposure detection",
+    "SSH configuration audit",
+    "SSH file permission audit",
+    "World-writable scanner",
+    "User account audit"];
+
+function renderHeroSection() {
+    return (
+        <section className="border-b border-zinc-200 px-5 py-24 text-center transition-colors dark:border-zinc-800 sm:py-32">
+            <p className="text-sm font-medium tracking-[.18em] text-zinc-600 dark:text-zinc-400">
+                SECURITY HARDENING AUDITOR
+            </p>
+            <h1 className="mx-auto mt-5 max-w-5xl text-5xl font-bold tracking-[-.06em] text-zinc-950 dark:text-white sm:text-7xl lg:text-8xl">
+                Audit your system. <br />
+                Know what needs attention.
+            </h1>
+            <p className="mx-auto mt-7 max-w-xl text-base leading-7 text-zinc-600 dark:text-zinc-400">
+                LinSentry is a lightweight security hardening auditor, currently available for Linux. macOS and Windows support are planned.
+            </p>
+            <div className="mt-8 flex justify-center gap-3">
+                <Link
+                    href="/docs/install"
+                    className="rounded-lg bg-zinc-950 px-5 py-3 text-sm font-semibold text-white transition hover:bg-zinc-700 dark:bg-white dark:text-zinc-950 dark:hover:bg-zinc-200"
+                >
+                    Install LinSentry
+                </Link>
+                <Link
+                    href="/docs/usage"
+                    className="rounded-lg border border-zinc-300 px-5 py-3 text-sm font-semibold text-zinc-950 transition hover:bg-zinc-100 dark:border-zinc-700 dark:text-white dark:hover:bg-zinc-900"
+                >
+                    Explore usage
+                </Link>
+            </div>
+        </section>
+    )
+}
+
+function renderQuickStart() {
+    return (
+        <section className="mx-auto max-w-6xl px-5 py-20">
+            <p
+                className="text-sm font-medium text-zinc-600 dark:text-zinc-400"
+            >
+                QUICK START
+            </p>
+            <h2
+                className="mt-3 text-3xl font-semibold tracking-tight text-zinc-950 dark:text-white"
+            >
+                One command. A clearer picture.
+            </h2>
+            <InstallPanel />
+        </section>
+    )
+}
+
+function renderFeatures() {
+    return (
+        <section
+            className="border-y border-zinc-200 bg-zinc-50 px-5 py-20 transition-colors dark:border-zinc-800 dark:bg-zinc-900/20"
+        >
+            <div
+                className="mx-auto max-w-6xl"
+            >
+                <p
+                    className="text-sm font-medium text-zinc-600 dark:text-zinc-400"
+                >
+                    WHAT IT CHECKS
+                </p>
+                <h2
+                    className="mt-3 text-3xl font-semibold tracking-tight text-zinc-950 dark:text-white"
+                >
+                    Focus on the risks that matter.
+                </h2>
+                <div
+                    className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3"
+                >
+                    {features.map((feature, i) =>
+                        <article
+                            className="rounded-xl border border-zinc-200 bg-white p-6 transition duration-200 hover:-translate-y-1 hover:border-zinc-500 dark:border-zinc-800 dark:bg-zinc-950 dark:hover:border-zinc-500" key={feature}
+                        >
+                            <p
+                                className="font-mono text-sm text-zinc-500">0{i + 1}
+                            </p>
+                            <h3
+                                className="mt-5 font-semibold text-zinc-950 dark:text-white">
+                                {feature}
+                            </h3>
+                            <p
+                                className="mt-2 text-sm leading-6 text-zinc-600 dark:text-zinc-400"
+                            >
+                                Practical insight into a common security hardening concern, with clear results to review.
+                            </p>
+                        </article>
+                    )}
+                </div>
+            </div>
+        </section>
+    )
+}
+
+function renderCTA() {
+    return (
+        <section
+            className="mx-auto max-w-6xl px-5 py-20 text-center"
+        >
+            <h2
+                className="text-3xl font-semibold tracking-tight text-zinc-950 dark:text-white"
+            >
+                Ready to dive into the details?
+            </h2>
+            <Link
+                href="/docs"
+                className="mt-7 inline-block rounded-lg bg-zinc-950 px-5 py-3 text-sm font-semibold text-white transition hover:bg-zinc-700 dark:bg-white dark:text-zinc-950"
+            >
+                Read the documentation
+            </Link>
+        </section>
+    )
+}
+
+export default function Home() {
+    return (
+        <div>
+            {renderHeroSection()}
+            {renderQuickStart()}
+            {renderFeatures()}
+            {renderCTA()}
+        </div>
+    )
+}

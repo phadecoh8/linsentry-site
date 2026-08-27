@@ -16,5 +16,5 @@ export function ThemeToggle() {
     document.documentElement.classList.toggle("dark", next);
   }
 
-  return <button onClick={toggle} className="grid size-9 place-items-center rounded-md text-zinc-600 transition hover:bg-zinc-100 hover:text-zinc-950 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-white" aria-label="Toggle color theme">{dark ? "☀" : "☾"}</button>;
+  return <button onClick={toggle} className="grid size-9 place-items-center rounded-md text-black-600 transition hover:bg-zinc-100 hover:text-zinc-950 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-white" aria-label="Toggle color theme">{dark ? "☀" : "☾"}</button>;
 }
