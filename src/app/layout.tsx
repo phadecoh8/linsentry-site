@@ -27,6 +27,9 @@ export const metadata: Metadata = {
     title: "LinSentry — Security Hardening Auditor",
     description: "A lightweight security hardening auditor, currently available for Linux."
   },
+  verification: {
+    google: "uVvrIe1PwXkTw9BsUcqi31TqlVZoMdmslMwZ4wZDTIU"
+  }
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
