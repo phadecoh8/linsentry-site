@@ -20,7 +20,7 @@ function renderIntro() {
             <p
                 className="mt-6 text-lg leading-8 text-zinc-600 dark:text-zinc-400"
             >
-                LinSentry is a lightweight security hardening auditor. It currently runs on Linux, including Ubuntu through WSL; macOS and Windows support are planned.
+                LinSentry is a lightweight security hardening auditor. As of v1.0.0 it performs a comprehensive set of checks across system posture — port exposure, SSH, file permissions, user accounts, sudo privileges, firewall, pending updates, AppArmor, and malware scanner presence — on Linux including Ubuntu through WSL. macOS and Windows support are planned via a Rust rewrite.
             </p>
         </section>
     )
@@ -63,6 +63,18 @@ function renderQuickLinks() {
             >
                 Usage →
             </Link>
+            <Link
+                href="/docs/checks"
+                className="rounded-lg border border-zinc-200 p-4 text-sm font-medium transition hover:border-zinc-950 dark:border-zinc-800 dark:hover:border-white"
+            >
+                Security checks →
+            </Link>
+            <Link
+                href="/docs/scope"
+                className="rounded-lg border border-zinc-200 p-4 text-sm font-medium transition hover:border-zinc-950 dark:border-zinc-800 dark:hover:border-white"
+            >
+                Scope &amp; Limitations →
+            </Link>
         </div>
     )
 }
@@ -79,7 +91,9 @@ function renderRoadmap() {
             <p
                 className="mt-4 leading-7 text-zinc-700 dark:text-zinc-300"
             >
-                Upcoming: sudo privilege audit, firewall status, pending security updates, overall risk summary, and native macOS and Windows support.
+                The original 10-check roadmap is complete as of v1.0.0. The next
+                major step is a cross-platform Rust rewrite planned for Linux,
+                macOS, Windows, and Termux.
             </p>
         </section>
     )

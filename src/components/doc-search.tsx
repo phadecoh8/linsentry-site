@@ -9,6 +9,7 @@ const docs = [
   { title: "Installation", href: "/docs/install", description: "Install LinSentry on Linux or WSL." },
   { title: "Usage", href: "/docs/usage", description: "Run an audit and understand its output." },
   { title: "Security checks", href: "/docs/checks", description: "Explore every audit LinSentry performs." },
+  { title: "Scope & Limitations", href: "/docs/scope", description: "What LinSentry audits and where its checks stop." },
 ];
 
 export function DocSearch() {
